@@ -43,27 +43,21 @@ const OfficeLayoutMap: React.FC<OfficeLayoutMapProps> = ({
   // In a real application, this would be a more sophisticated component
   return (
     <div className="bg-white p-4 rounded-lg shadow mb-8">
-      <h3 className="font-bold mb-4">
-        {floor ? `Office Layout: ${floor.name}` : 'Office Layout'}
-      </h3>
-      <div className={`border border-gray-200 rounded ${height} flex items-center justify-center bg-gray-50`}>
-        {isLoading ? (
-          <div className="text-gray-400">Loading map...</div>
-        ) : floorId ? (
-          <div className="text-center">
-            <p className="text-gray-500 mb-2">
-              {zones.length} zones, {seats.length} seats
-            </p>
-            <p className="text-gray-400">
-              {interactive 
-                ? 'Interactive Office Layout Map' 
-                : 'Office Layout Preview'}
-            </p>
-          </div>
-        ) : (
-          <p className="text-gray-400">Select a floor to view the layout</p>
-        )}
-      </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[...Array(5)].map((_, index) => {
+            const floor = 1600 + index + 1;
+            const availableSeats = Math.floor(Math.random() * 20) + 1;
+            const occupiedSeats = Math.floor(Math.random() * 20) + 1;
+
+            return (
+              <div key={index} className="bg-gray-200 p-4 rounded shadow-md">
+                <h5 className="font-bold text-lg mb-2">{`Floor: ${floor}`}</h5>
+                <p>{`Available Seats: ${availableSeats}`}</p>
+                <p>{`Occupied Seats: ${occupiedSeats}`}</p>
+              </div>
+            );
+          })}
+        </div>
     </div>
   );
 };

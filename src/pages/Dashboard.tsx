@@ -87,6 +87,7 @@ import { SeatService } from '../services/seats';
 import { NotificationService } from '../services/notifications';
 import { useUI } from '../contexts/UIContext';
 import { Users, LayoutGrid, FileCheck } from 'lucide-react';
+import { projects } from '../utils/projects';
 
 const Dashboard: React.FC = () => {
   const { showToast } = useUI();
@@ -101,10 +102,7 @@ const Dashboard: React.FC = () => {
 
   // Fetch users, projects and seats
   const { documents: users, loading: loadingUsers } = useCollection<User>('users');
-  const { documents: projects, loading: loadingProjects } = useCollection<Project>(
-    'projects', 
-    [{ field: 'status', operator: '==', value: 'active' }]
-  );
+ 
   const { documents: seats, loading: loadingSeats } = useCollection<Seat>('seats');
 
   // Calculate statistics
@@ -304,7 +302,7 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const isLoading = loadingUsers || loadingProjects || loadingSeats;
+  const isLoading = loadingUsers || loadingSeats;
   const isEmpty = !isLoading && users.length === 0 && projects.length === 0 && seats.length === 0;
 
   return (
@@ -376,7 +374,6 @@ const Dashboard: React.FC = () => {
           {/* Project Distribution */}
           <ProjectDistribution 
             projects={projects} 
-            totalEmployees={officeStats.totalEmployees} 
           />
         </>
       )}
