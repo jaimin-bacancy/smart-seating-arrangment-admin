@@ -105,6 +105,11 @@ const Dashboard: React.FC = () => {
  
   const { documents: seats, loading: loadingSeats } = useCollection<Seat>('seats');
 
+  const { documents: projects } = useCollection<Project>(
+    'projects', 
+    [{ field: 'status', operator: '==', value: 'active' }]
+  );
+
   // Calculate statistics
   useEffect(() => {
     if (users.length && !loadingUsers) {
