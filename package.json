@@ -1,0 +1,43 @@
+{
+  "name": "smart-seating-arrangement-client",
+  "version": "1.0.0",
+  "description": "A React application for smart seating arrangement",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jaimin-bacancy/smart-seating-arrangment-client.git"
+  },
+  "keywords": [],
+  "author": "Vroksi Roy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaimin-bacancy/smart-seating-arrangment-admin/issues"
+  },
+  "homepage": "https://github.com/vroksiroy/namaste-react-new#readme",
+  "devDependencies": {
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.1",
+    "events": "^3.3.0",
+    "parcel": "^2.13.3",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "querystring-es3": "^0.2.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.4",
+    "util": "^0.12.5"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.5"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
