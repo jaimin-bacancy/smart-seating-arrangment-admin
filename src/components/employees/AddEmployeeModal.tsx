@@ -5,24 +5,7 @@ import { UserService } from '../../services/users';
 import { User, UserRole } from '../../types';
 import { useUI } from '../../contexts/UIContext';
 import { isValidEmail } from '../../utils/validators';
-import { getFunctions, httpsCallable } from "firebase/functions";
-import { createUserFunction } from '../../config/firebaseConfig';
 import { getAuth } from 'firebase/auth';
-
-// const functions = getFunctions();
-
-const addEmployee = async (employeeData) => {
-  // const createUser = httpsCallable(functions, "createUser");
-
-  try {
-    const result = await createUserFunction(employeeData);
-    console.log("New user UID:", result?.data?.uid);
-    return result?.data?.uid;
-  } catch (err) {
-    console.error("Failed to create user:", err.message);
-    throw err;
-  }
-};
 interface AddEmployeeModalProps {
   onClose: () => void;
   onSuccess: () => void;
