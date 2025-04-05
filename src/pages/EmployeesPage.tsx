@@ -101,7 +101,7 @@ const EmployeesPage: React.FC = () => {
         
         showToast('Employee removed successfully', 'success');
       } catch (error) {
-        console.error('Error removing employee:', error);
+        // console.error('Error removing employee:', error);
         showToast('Failed to remove employee', 'error');
       }
     }

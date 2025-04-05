@@ -129,7 +129,7 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ onClose, onSuccess 
       onSuccess();
       onClose();
     } catch (error) {
-      console.error('Error adding employee:::', error?.message);
+      // console.error('Error adding employee:::', error?.message);
       showToast(error instanceof Error ? error.message : 'Failed to add employee', 'error');
     } finally {
       setLoading(false);

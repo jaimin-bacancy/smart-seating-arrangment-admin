@@ -23,7 +23,7 @@ export const LayoutService = {
         layoutData
       );
     } catch (error) {
-      console.error('Error creating office layout:', error);
+      // console.error('Error creating office layout:', error);
       throw error;
     }
   },
@@ -73,7 +73,7 @@ export const LayoutService = {
         ...doc.data()
       } as WithId<OfficeLayout>;
     } catch (error) {
-      console.error('Error getting active layout:', error);
+      // console.error('Error getting active layout:', error);
       throw error;
     }
   },
@@ -107,7 +107,7 @@ export const LayoutService = {
       // Commit the batch
       await batch.commit();
     } catch (error) {
-      console.error(`Error setting layout ${id} as active:`, error);
+      // console.error(`Error setting layout ${id} as active:`, error);
       throw error;
     }
   }

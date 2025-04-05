@@ -25,7 +25,7 @@ export const AuthService = {
       
       return uid;
     } catch (error) {
-      console.error('Error registering user:', error);
+      // console.error('Error registering user:', error);
       throw error;
     }
   },
@@ -35,7 +35,7 @@ export const AuthService = {
     try {
       await auth.signInWithEmailAndPassword(email, password);
     } catch (error) {
-      console.error('Error logging in:', error);
+      // console.error('Error logging in:', error);
       throw error;
     }
   },
@@ -45,7 +45,7 @@ export const AuthService = {
     try {
       await auth.signOut();
     } catch (error) {
-      console.error('Error logging out:', error);
+      // console.error('Error logging out:', error);
       throw error;
     }
   },
@@ -60,7 +60,7 @@ export const AuthService = {
     try {
       await auth.sendPasswordResetEmail(email);
     } catch (error) {
-      console.error('Error sending password reset email:', error);
+      // console.error('Error sending password reset email:', error);
       throw error;
     }
   },
@@ -75,7 +75,7 @@ export const AuthService = {
       
       await user.updateEmail(newEmail);
     } catch (error) {
-      console.error('Error updating email:', error);
+      // console.error('Error updating email:', error);
       throw error;
     }
   },
@@ -90,7 +90,7 @@ export const AuthService = {
       
       await user.updatePassword(newPassword);
     } catch (error) {
-      console.error('Error updating password:', error);
+      // console.error('Error updating password:', error);
       throw error;
     }
   }

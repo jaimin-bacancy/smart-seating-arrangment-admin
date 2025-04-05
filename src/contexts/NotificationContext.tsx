@@ -62,7 +62,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
           setLoading(false);
         },
         (error) => {
-          console.error('Error fetching notifications:', error);
+          // console.error('Error fetching notifications:', error);
           setLoading(false);
         }
       );
@@ -81,7 +81,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
         readBy: arrayUnion(userRef)
       });
     } catch (error) {
-      console.error('Error marking notification as read:', error);
+      // console.error('Error marking notification as read:', error);
     }
   };
 
@@ -105,7 +105,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
       
       await batch.commit();
     } catch (error) {
-      console.error('Error marking all notifications as read:', error);
+      // console.error('Error marking all notifications as read:', error);
     }
   };
 
@@ -120,7 +120,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
         recipients: arrayRemove(userRef)
       });
     } catch (error) {
-      console.error('Error clearing notification:', error);
+      // console.error('Error clearing notification:', error);
     }
   };
 

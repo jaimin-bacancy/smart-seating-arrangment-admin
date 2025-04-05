@@ -104,7 +104,7 @@ const SeatProperties: React.FC<SeatPropertiesProps> = ({
         setAssignedUserId(null);
       }
     } catch (error) {
-      console.error('Error saving seat:', error);
+      // console.error('Error saving seat:', error);
     }
   };
 

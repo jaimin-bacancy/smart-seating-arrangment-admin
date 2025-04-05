@@ -76,7 +76,7 @@ export const FloorService = {
 
       return floorRef.id;
     } catch (error) {
-      console.error("Error creating floor with seats:", error);
+      // console.error("Error creating floor with seats:", error);
       throw error;
     }
   },
@@ -132,7 +132,7 @@ export const FloorService = {
       // Commit all deletions as a batch
       await batch.commit();
     } catch (error) {
-      console.error(`Error deleting floor ${id} and its resources:`, error);
+      // console.error(`Error deleting floor ${id} and its resources:`, error);
       throw error;
     }
   },
@@ -157,7 +157,7 @@ export const FloorService = {
         ...doc.data(),
       })) as WithId<Floor>[];
     } catch (error) {
-      console.error(`Error getting floors for layout ${layoutId}:`, error);
+      // console.error(`Error getting floors for layout ${layoutId}:`, error);
       throw error;
     }
   },

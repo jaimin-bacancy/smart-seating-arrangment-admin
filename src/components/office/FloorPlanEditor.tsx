@@ -214,7 +214,7 @@ const FloorPlanEditor: React.FC<{
 
       // Refresh the data (your useCollection hook should handle this automatically)
     } catch (error) {
-      console.error("Error assigning seat:", error);
+      // console.error("Error assigning seat:", error);
       alert("Failed to assign seat. Please try again.");
     } finally {
       setIsAssigning(false);
@@ -239,7 +239,7 @@ const FloorPlanEditor: React.FC<{
 
       // Refresh the data (your useCollection hook should handle this automatically)
     } catch (error) {
-      console.error("Error unassigning seat:", error);
+      // console.error("Error unassigning seat:", error);
       alert("Failed to unassign seat. Please try again.");
     } finally {
       setIsAssigning(false);

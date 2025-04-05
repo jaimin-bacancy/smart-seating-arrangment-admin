@@ -38,7 +38,7 @@ export const ProjectService = {
         projectData
       );
     } catch (error) {
-      console.error('Error creating project:', error);
+      // console.error('Error creating project:', error);
       throw error;
     }
   },
@@ -97,7 +97,7 @@ export const ProjectService = {
         ...doc.data()
       })) as WithId<Project>[];
     } catch (error) {
-      console.error(`Error getting projects for user ${userId}:`, error);
+      // console.error(`Error getting projects for user ${userId}:`, error);
       throw error;
     }
   },
@@ -118,7 +118,7 @@ export const ProjectService = {
         currentProjects: arrayUnion(projectRef)
       });
     } catch (error) {
-      console.error(`Error adding user ${userId} to project ${projectId}:`, error);
+      // console.error(`Error adding user ${userId} to project ${projectId}:`, error);
       throw error;
     }
   },
@@ -139,7 +139,7 @@ export const ProjectService = {
         currentProjects: arrayRemove(projectRef)
       });
     } catch (error) {
-      console.error(`Error removing user ${userId} from project ${projectId}:`, error);
+      // console.error(`Error removing user ${userId} from project ${projectId}:`, error);
       throw error;
     }
   },
@@ -151,7 +151,7 @@ export const ProjectService = {
         status
       });
     } catch (error) {
-      console.error(`Error updating status for project ${projectId}:`, error);
+      // console.error(`Error updating status for project ${projectId}:`, error);
       throw error;
     }
   }

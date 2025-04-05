@@ -48,7 +48,7 @@ export const useSeatingAlgorithm = () => {
       setLoading(false);
       return planId;
     } catch (err) {
-      console.error('Error optimizing seating:', err);
+      // console.error('Error optimizing seating:', err);
       setError(err as Error);
       setLoading(false);
       throw err;

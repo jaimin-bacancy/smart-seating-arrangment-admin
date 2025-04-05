@@ -83,7 +83,7 @@ export const useFirestore = <T>(collection: string) => {
           setError(null);
         },
         (err) => {
-          console.error(`Error fetching ${collection}:`, err);
+          // console.error(`Error fetching ${collection}:`, err);
           setError(err as Error);
           setLoading(false);
         }

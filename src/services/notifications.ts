@@ -47,7 +47,7 @@ export const NotificationService = {
         notificationData
       );
     } catch (error) {
-      console.error('Error creating notification:', error);
+      // console.error('Error creating notification:', error);
       throw error;
     }
   },
@@ -82,7 +82,7 @@ export const NotificationService = {
         ...doc.data()
       })) as WithId<Notification>[];
     } catch (error) {
-      console.error(`Error getting notifications for user ${userId}:`, error);
+      // console.error(`Error getting notifications for user ${userId}:`, error);
       throw error;
     }
   },
@@ -98,7 +98,7 @@ export const NotificationService = {
         !notification.readBy.some(ref => ref.id === userId)
       );
     } catch (error) {
-      console.error(`Error getting unread notifications for user ${userId}:`, error);
+      // console.error(`Error getting unread notifications for user ${userId}:`, error);
       throw error;
     }
   },
@@ -112,7 +112,7 @@ export const NotificationService = {
         readBy: arrayUnion(userRef)
       });
     } catch (error) {
-      console.error(`Error marking notification ${notificationId} as read:`, error);
+      // console.error(`Error marking notification ${notificationId} as read:`, error);
       throw error;
     }
   },
@@ -135,7 +135,7 @@ export const NotificationService = {
       
       await batch.commit();
     } catch (error) {
-      console.error(`Error marking all notifications as read for user ${userId}:`, error);
+      // console.error(`Error marking all notifications as read for user ${userId}:`, error);
       throw error;
     }
   },
@@ -162,7 +162,7 @@ export const NotificationService = {
         }
       );
     } catch (error) {
-      console.error('Error creating seat change notification:', error);
+      // console.error('Error creating seat change notification:', error);
       throw error;
     }
   },
@@ -189,7 +189,7 @@ export const NotificationService = {
         'medium'
       );
     } catch (error) {
-      console.error('Error creating maintenance notification:', error);
+      // console.error('Error creating maintenance notification:', error);
       throw error;
     }
   },
@@ -217,7 +217,7 @@ export const NotificationService = {
         priority
       );
     } catch (error) {
-      console.error('Error creating announcement notification:', error);
+      // console.error('Error creating announcement notification:', error);
       throw error;
     }
   }

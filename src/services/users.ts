@@ -32,7 +32,7 @@ export const UserService = {
         createdAt: Timestamp.now(),
       });
     } catch (error) {
-      console.error('Error creating user:', error);
+      // console.error('Error creating user:', error);
       throw error;
     }
   },
@@ -66,7 +66,7 @@ export const UserService = {
         ...doc.data()
       })) as WithId<User>[];
     } catch (error) {
-      console.error(`Error getting users for project ${projectId}:`, error);
+      // console.error(`Error getting users for project ${projectId}:`, error);
       throw error;
     }
   },

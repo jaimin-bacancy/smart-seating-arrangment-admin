@@ -43,7 +43,7 @@ export const ChangeRequestService = {
         requestData
       );
     } catch (error) {
-      console.error('Error creating seat change request:', error);
+      // console.error('Error creating seat change request:', error);
       throw error;
     }
   },
@@ -78,7 +78,7 @@ export const ChangeRequestService = {
         ...doc.data()
       })) as WithId<SeatChangeRequest>[];
     } catch (error) {
-      console.error(`Error getting change requests for user ${userId}:`, error);
+      // console.error(`Error getting change requests for user ${userId}:`, error);
       throw error;
     }
   },
@@ -99,7 +99,7 @@ export const ChangeRequestService = {
         updatedAt: Timestamp.now()
       });
     } catch (error) {
-      console.error(`Error approving change request ${requestId}:`, error);
+      // console.error(`Error approving change request ${requestId}:`, error);
       throw error;
     }
   },
@@ -120,7 +120,7 @@ export const ChangeRequestService = {
         updatedAt: Timestamp.now()
       });
     } catch (error) {
-      console.error(`Error rejecting change request ${requestId}:`, error);
+      // console.error(`Error rejecting change request ${requestId}:`, error);
       throw error;
     }
   }

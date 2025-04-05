@@ -13,7 +13,7 @@ export const FirestoreService = {
       });
       return docRef.id;
     } catch (error) {
-      console.error(`Error creating document in ${collection}:`, error);
+      // console.error(`Error creating document in ${collection}:`, error);
       throw error;
     }
   },
@@ -32,7 +32,7 @@ export const FirestoreService = {
         ...doc.data() 
       } as WithId<T>;
     } catch (error) {
-      console.error(`Error getting document ${id} from ${collection}:`, error);
+      // console.error(`Error getting document ${id} from ${collection}:`, error);
       throw error;
     }
   },
@@ -45,7 +45,7 @@ export const FirestoreService = {
         updatedAt: Timestamp.now(),
       });
     } catch (error) {
-      console.error(`Error updating document ${id} in ${collection}:`, error);
+      // console.error(`Error updating document ${id} in ${collection}:`, error);
       throw error;
     }
   },
@@ -55,7 +55,7 @@ export const FirestoreService = {
     try {
       await firestore.collection(collection).doc(id).delete();
     } catch (error) {
-      console.error(`Error deleting document ${id} from ${collection}:`, error);
+      // console.error(`Error deleting document ${id} from ${collection}:`, error);
       throw error;
     }
   },
@@ -70,7 +70,7 @@ export const FirestoreService = {
         ...doc.data()
       })) as WithId<T>[];
     } catch (error) {
-      console.error(`Error getting collection ${collection}:`, error);
+      // console.error(`Error getting collection ${collection}:`, error);
       throw error;
     }
   },
@@ -93,7 +93,7 @@ export const FirestoreService = {
         ...doc.data()
       })) as WithId<T>[];
     } catch (error) {
-      console.error(`Error querying collection ${collection}:`, error);
+      // console.error(`Error querying collection ${collection}:`, error);
       throw error;
     }
   }

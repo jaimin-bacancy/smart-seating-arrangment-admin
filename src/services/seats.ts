@@ -42,7 +42,7 @@ export const SeatService = {
 
       return seatId;
     } catch (error) {
-      console.error("Error creating seat:", error);
+      // console.error("Error creating seat:", error);
       throw error;
     }
   },
@@ -77,7 +77,7 @@ export const SeatService = {
       // Delete the seat
       await seatRef.delete();
     } catch (error) {
-      console.error(`Error deleting seat ${id}:`, error);
+      // console.error(`Error deleting seat ${id}:`, error);
       throw error;
     }
   },
@@ -101,7 +101,7 @@ export const SeatService = {
         ...doc.data(),
       })) as WithId<Seat>[];
     } catch (error) {
-      console.error(`Error getting seats for floor ${floorId}:`, error);
+      // console.error(`Error getting seats for floor ${floorId}:`, error);
       throw error;
     }
   },
@@ -120,7 +120,7 @@ export const SeatService = {
         ...doc.data(),
       })) as WithId<Seat>[];
     } catch (error) {
-      console.error(`Error getting seats for zone ${zoneId}:`, error);
+      // console.error(`Error getting seats for zone ${zoneId}:`, error);
       throw error;
     }
   },
@@ -212,7 +212,7 @@ export const SeatService = {
         }
       }
     } catch (error) {
-      console.error(`Error assigning seat ${seatId} to user ${userId}:`, error);
+      // console.error(`Error assigning seat ${seatId} to user ${userId}:`, error);
       throw error;
     }
   },
@@ -265,7 +265,7 @@ export const SeatService = {
         });
       }
     } catch (error) {
-      console.error(`Error unassigning seat ${seatId}:`, error);
+      // console.error(`Error unassigning seat ${seatId}:`, error);
       throw error;
     }
   },
@@ -290,7 +290,7 @@ export const SeatService = {
         ...doc.data(),
       } as WithId<Seat>;
     } catch (error) {
-      console.error(`Error getting seat for user ${userId}:`, error);
+      // console.error(`Error getting seat for user ${userId}:`, error);
       throw error;
     }
   },
@@ -322,7 +322,7 @@ export const SeatService = {
         lastModified: Timestamp.now(),
       });
     } catch (error) {
-      console.error(`Error setting seat ${seatId} to maintenance:`, error);
+      // console.error(`Error setting seat ${seatId} to maintenance:`, error);
       throw error;
     }
   },

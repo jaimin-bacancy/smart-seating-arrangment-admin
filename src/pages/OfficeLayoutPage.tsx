@@ -130,7 +130,7 @@ const OfficeLayoutPage: React.FC = () => {
 
       showToast(`Zone "${name}" created successfully`, "success");
     } catch (error) {
-      console.error("Error creating zone:", error);
+      // console.error("Error creating zone:", error);
       showToast("Failed to create zone", "error");
     } finally {
       setIsCreating(false);
@@ -166,7 +166,7 @@ const OfficeLayoutPage: React.FC = () => {
 
       showToast("Zone deleted successfully", "success");
     } catch (error) {
-      console.error("Error deleting zone:", error);
+      // console.error("Error deleting zone:", error);
       showToast("Failed to delete zone", "error");
     }
   };
@@ -183,7 +183,7 @@ const OfficeLayoutPage: React.FC = () => {
       setSelectedLayoutId(layoutId);
       showToast(`Layout "${layoutName}" created successfully`, "success");
     } catch (error) {
-      console.error("Error creating layout:", error);
+      // console.error("Error creating layout:", error);
       showToast("Failed to create layout", "error");
     } finally {
       setIsCreating(false);
@@ -217,7 +217,7 @@ const OfficeLayoutPage: React.FC = () => {
         showToast(`Floor "${floorName}" created successfully`, "success");
       }
     } catch (error) {
-      console.error("Error creating floor:", error);
+      // console.error("Error creating floor:", error);
       showToast("Failed to create floor", "error");
     } finally {
       setIsCreating(false);

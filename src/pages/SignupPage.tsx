@@ -120,7 +120,7 @@ const SignupPage: React.FC = () => {
         window.location.href = '/login';
       }, 2000);
     } catch (error) {
-      console.error('Signup error:', error);
+      // console.error('Signup error:', error);
       showToast(error instanceof Error ? error.message : 'Failed to create account', 'error');
     } finally {
       setLoading(false);

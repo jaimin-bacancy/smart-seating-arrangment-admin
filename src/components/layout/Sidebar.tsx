@@ -17,7 +17,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
       await AuthService.logoutUser();
       // Redirect handled by AuthContext
     } catch (error) {
-      console.error('Logout failed:', error);
+      // console.error('Logout failed:', error);
     }
   };
 

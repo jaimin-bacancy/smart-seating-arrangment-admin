@@ -40,7 +40,7 @@ export const ZoneService = {
       
       return zoneId;
     } catch (error) {
-      console.error('Error creating zone:', error);
+      // console.error('Error creating zone:', error);
       throw error;
     }
   },
@@ -76,7 +76,7 @@ export const ZoneService = {
       // Delete the zone
       await zoneRef.delete();
     } catch (error) {
-      console.error(`Error deleting zone ${id}:`, error);
+      // console.error(`Error deleting zone ${id}:`, error);
       throw error;
     }
   },
@@ -100,7 +100,7 @@ export const ZoneService = {
         ...doc.data()
       })) as WithId<Zone>[];
     } catch (error) {
-      console.error(`Error getting zones for floor ${floorId}:`, error);
+      // console.error(`Error getting zones for floor ${floorId}:`, error);
       throw error;
     }
   },
@@ -124,7 +124,7 @@ export const ZoneService = {
         seats: arrayUnion(seatRef)
       });
     } catch (error) {
-      console.error(`Error adding seat ${seatId} to zone ${zoneId}:`, error);
+      // console.error(`Error adding seat ${seatId} to zone ${zoneId}:`, error);
       throw error;
     }
   },
@@ -138,7 +138,7 @@ export const ZoneService = {
         seats: arrayRemove(seatRef)
       });
     } catch (error) {
-      console.error(`Error removing seat ${seatId} from zone ${zoneId}:`, error);
+      // console.error(`Error removing seat ${seatId} from zone ${zoneId}:`, error);
       throw error;
     }
   },
@@ -149,7 +149,7 @@ export const ZoneService = {
       const zone = await ZoneService.getZoneById(zoneId);
       return zone ? zone.seats.length : 0;
     } catch (error) {
-      console.error(`Error getting capacity for zone ${zoneId}:`, error);
+      // console.error(`Error getting capacity for zone ${zoneId}:`, error);
       throw error;
     }
   },
@@ -197,7 +197,7 @@ export const ZoneService = {
         rate
       };
     } catch (error) {
-      console.error(`Error getting occupancy for zone ${zoneId}:`, error);
+      // console.error(`Error getting occupancy for zone ${zoneId}:`, error);
       throw error;
     }
   }

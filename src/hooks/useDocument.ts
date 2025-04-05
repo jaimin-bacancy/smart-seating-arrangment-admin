@@ -29,7 +29,7 @@ export const useDocument = <T>(collection: string, id: string | null) => {
         setError(null);
       },
       (err) => {
-        console.error(`Error fetching document ${id} from ${collection}:`, err);
+        // console.error(`Error fetching document ${id} from ${collection}:`, err);
         setError(err as Error);
         setLoading(false);
       }

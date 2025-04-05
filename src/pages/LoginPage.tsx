@@ -25,7 +25,7 @@ const LoginPage: React.FC = () => {
       
       // Login successful - the auth observer in AuthContext will redirect
     } catch (err) {
-      console.error('Login error:', err);
+      // console.error('Login error:', err);
       setError('Invalid email or password');
       showToast('Login failed. Please check your credentials.', 'error');
     } finally {
@@ -64,7 +64,7 @@ const LoginPage: React.FC = () => {
       
       // Login successful - the auth observer in AuthContext will redirect
     } catch (err) {
-      console.error('Demo login error:', err);
+      // console.error('Demo login error:', err);
       setError('Failed to log in with demo account');
       showToast('Demo login failed. Please try again.', 'error');
     } finally {

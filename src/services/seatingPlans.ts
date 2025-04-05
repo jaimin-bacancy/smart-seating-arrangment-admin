@@ -55,7 +55,7 @@ export const SeatingPlanService = {
         ...doc.data()
       } as WithId<SeatingPlan>;
     } catch (error) {
-      console.error('Error getting active seating plan:', error);
+      // console.error('Error getting active seating plan:', error);
       throw error;
     }
   },
@@ -86,7 +86,7 @@ export const SeatingPlanService = {
       // Commit the batch
       await batch.commit();
     } catch (error) {
-      console.error(`Error activating seating plan ${id}:`, error);
+      // console.error(`Error activating seating plan ${id}:`, error);
       throw error;
     }
   },
@@ -99,7 +99,7 @@ export const SeatingPlanService = {
         updatedAt: Timestamp.now()
       });
     } catch (error) {
-      console.error(`Error updating algorithm parameters for plan ${id}:`, error);
+      // console.error(`Error updating algorithm parameters for plan ${id}:`, error);
       throw error;
     }
   }
