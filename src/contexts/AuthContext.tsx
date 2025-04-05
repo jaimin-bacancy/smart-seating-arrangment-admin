@@ -28,7 +28,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Set up the auth state observer
     const unsubscribe = setupAuthObserver(async (user) => {
       setCurrentUser(user);
-      console.log('User profile:3', user.uid);
       if (user) {
         try {
           // Fetch the user's profile data
