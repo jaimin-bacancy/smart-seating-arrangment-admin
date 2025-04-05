@@ -17,7 +17,7 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ onClose, onSuccess 
   const [formData, setFormData] = useState({
     displayName: '',
     email: '',
-    password: 'SmartOffice123', // Default password that employee will change upon first login
+    password: 'Bacancy@123', // Default password that employee will change upon first login
     role: 'employee' as UserRole,
     department: 'Engineering',
     employeeId: '',
@@ -126,10 +126,10 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ onClose, onSuccess 
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-medium mb-4">Add New Employee</h2>
+      <h2 className="text-lg font-medium">Add New Employee</h2>
       
       <form onSubmit={handleSubmit}>
-        <div className="space-y-4">
+        <div>
           {/* Basic Information */}
           <div>
             <h3 className="font-medium text-sm text-gray-500 mb-3">Basic Information</h3>

@@ -212,7 +212,7 @@ const EmployeesPage: React.FC = () => {
   const handleAddEmployee = () => {
     console.log('Add new employee button clicked');
     openModal(
-      'Add New Employee',
+      '',
       <AddEmployeeModal 
         onClose={() => {}} // Modal will be closed by the UI context
         onSuccess={() => {
@@ -303,14 +303,6 @@ const EmployeesPage: React.FC = () => {
           className="w-64"
         />
         <div className="space-x-2">
-          {employees.length === 0 && (
-            <button
-              className="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50"
-              onClick={handleGenerateSampleData}
-            >
-              Generate Sample Data
-            </button>
-          )}
           <button 
             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             onClick={handleAddEmployee}
@@ -341,12 +333,6 @@ const EmployeesPage: React.FC = () => {
             Get started by adding employees to your organization or generate sample data.
           </p>
           <div className="flex justify-center space-x-4">
-            <button
-              className="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50"
-              onClick={handleGenerateSampleData}
-            >
-              Generate Sample Data
-            </button>
             <button 
               className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
               onClick={handleAddEmployee}

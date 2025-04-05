@@ -1,6 +1,7 @@
 import React from 'react';
 import useCollection from '../../hooks/useCollection';
 import { Project } from '../../types';
+import { projects } from '../../utils/projects';
 
 interface EmployeeFiltersProps {
   departments: string[];
@@ -22,10 +23,6 @@ const EmployeeFilters: React.FC<EmployeeFiltersProps> = ({
   onTechSkillChange
 }) => {
   // Fetch all active projects
-  const { documents: projects } = useCollection<Project>(
-    'projects',
-    [{ field: 'status', operator: '==', value: 'active' }]
-  );
 
   // Common tech skills (in a real app, these might be fetched from a config)
   const commonTechSkills = [
@@ -63,7 +60,7 @@ const EmployeeFilters: React.FC<EmployeeFiltersProps> = ({
           >
             <option value="">All Projects</option>
             {projects.map(project => (
-              <option key={project.id} value={project.id}>{project.name}</option>
+              <option key={project.id} value={project.id}>{project.displayName}</option>
             ))}
           </select>
         </div>
