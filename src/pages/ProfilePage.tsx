@@ -175,7 +175,7 @@ const ProfilePage: React.FC = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-2 bg-blue-600 text-white rounded"
+                  className="w-full py-2 bg-[#E7873C] text-white rounded"
                 >
                   Update Email
                 </button>
@@ -220,7 +220,7 @@ const ProfilePage: React.FC = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-2 bg-blue-600 text-white rounded"
+                  className="w-full py-2 bg-[#E7873C] text-white rounded"
                 >
                   Update Password
                 </button>
@@ -246,7 +246,7 @@ const ProfilePage: React.FC = () => {
                 Cancel
               </button>
               <button
-                className="px-3 py-1 bg-blue-600 text-white rounded"
+                className="px-3 py-1 bg-[#E7873C] text-white rounded"
                 onClick={handleSkillsUpdate}
               >
                 Save

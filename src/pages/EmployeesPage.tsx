@@ -123,9 +123,7 @@ const EmployeesPage: React.FC = () => {
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6">Employee Management</h2>
-      
+    <div className="p-4">      
       <div className="flex justify-between items-center mb-4">
         <SearchInput 
           value={searchTerm}
@@ -135,7 +133,7 @@ const EmployeesPage: React.FC = () => {
         />
         <div className="space-x-2">
           <button 
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="px-4 py-2 bg-[#E7873C] text-white rounded hover:bg-blue-700"
             onClick={handleAddEmployee}
           >
             Add Employee
@@ -165,7 +163,7 @@ const EmployeesPage: React.FC = () => {
           </p>
           <div className="flex justify-center space-x-4">
             <button 
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="px-4 py-2 bg-[#E7873C] text-white rounded hover:bg-blue-700"
               onClick={handleAddEmployee}
             >
               Add First Employee

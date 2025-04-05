@@ -235,12 +235,10 @@ const OfficeLayoutPage: React.FC = () => {
   console.log("floors:::", floors);
   return (
     <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Office Layout Management</h2>
-
+      <div className="flex justify-between items-center mb-2">
         {isEmpty && (
           <button
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-blue-300"
+            className="px-4 py-2 bg-[#E7873C] text-white rounded hover:bg-blue-700 disabled:bg-blue-300"
             onClick={handleCreateLayout}
             disabled={isCreating}
           >
@@ -266,7 +264,7 @@ const OfficeLayoutPage: React.FC = () => {
             seats.
           </p>
           <button
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-blue-300"
+            className="px-6 py-3 bg-[#E7873C] text-white rounded-lg hover:bg-blue-700 disabled:bg-blue-300"
             onClick={handleCreateLayout}
             disabled={isCreating}
           >

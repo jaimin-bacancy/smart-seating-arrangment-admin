@@ -46,16 +46,16 @@ projects,
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm text-gray-900 space-x-1">
                   {employee.techSkills.map((skill, i) => (
-                    <span key={i} className="px-2 py-1 bg-gray-100 rounded text-xs">
+                    <span key={i} className="px-2 py-1 bg-[#E7873C] rounded text-xs">
                       {skill}
                     </span>
                   ))}
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-blue-800">
+                <span className="px-2 inline-flex text-xs leading-5 rounded-full text-xs">
                 {employee.team.map((item, i) => (
-                    <span key={i} className="px-2 py-1 mr-2 bg-gray-100 rounded text-xs">
+                    <span key={i} className="px-2 py-1 mr-2 bg-[#E7873C] rounded text-xs">
                       {item.displayName}
                     </span>
                   ))}

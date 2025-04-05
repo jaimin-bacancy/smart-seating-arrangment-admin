@@ -429,7 +429,7 @@ const FloorPlanEditor: React.FC<{
                           alert("Please select a user first");
                         }
                       }}
-                      className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                      className="w-full py-2 bg-[#E7873C] text-white rounded-md hover:bg-blue-700 transition-colors"
                       disabled={isAssigning || !selectedUserId}
                     >
                       {isAssigning ? "Assigning..." : "Assign to User"}
@@ -453,7 +453,7 @@ const FloorPlanEditor: React.FC<{
       )}
 
       {/* Add some styles for hiding scrollbar in a clean way */}
-      <style jsx>{`
+      {/* <style jsx>{`
         .hide-scrollbar::-webkit-scrollbar {
           display: none;
         }
@@ -472,7 +472,7 @@ const FloorPlanEditor: React.FC<{
         .animate-slide-up {
           animation: slide-up 0.3s ease-out;
         }
-      `}</style>
+      `}</style> */}
     </div>
   );
 };

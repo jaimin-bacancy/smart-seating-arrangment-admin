@@ -261,7 +261,7 @@ const SignupPage: React.FC = () => {
           <button 
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:bg-blue-300"
+            className="w-full bg-[#E7873C] text-white py-2 rounded hover:bg-blue-700 disabled:bg-blue-300"
           >
             {loading ? 'Creating Account...' : 'Sign Up'}
           </button>

@@ -44,20 +44,20 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
                     {employee.displayName.charAt(0).toUpperCase()}
                   </div>
                   <div className="ml-4">
-                    <div className="text-sm font-medium text-gray-900">{employee.displayName}</div>
+                    <div className="text-sm text-gray-900">{employee.displayName}</div>
                     <div className="text-sm text-gray-500">{employee.email}</div>
                   </div>
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                <span className="px-2 inline-flex leading-5 rounded bg-[#E7873C] text-xs">
                   {employee.department}
                 </span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm text-gray-900 space-x-1">
                   {employee.techSkills.map((skill, i) => (
-                    <span key={i} className="px-2 py-1 bg-gray-100 rounded text-xs">
+                    <span key={i} className="px-2 py-1 bg-[#E7873C] rounded text-xs">
                       {skill}
                     </span>
                   ))}

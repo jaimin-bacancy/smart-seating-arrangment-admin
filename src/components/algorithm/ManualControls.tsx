@@ -21,7 +21,7 @@ const ManualControls: React.FC<ManualControlsProps> = ({
           className={`w-full py-2 ${
             isRunning 
               ? 'bg-gray-400 cursor-not-allowed' 
-              : 'bg-blue-600 hover:bg-blue-700'
+              : 'bg-[#E7873C] hover:bg-blue-700'
           } text-white rounded font-medium`}
           onClick={onRunOptimization}
           disabled={isRunning}
