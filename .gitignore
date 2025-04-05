@@ -3,3 +3,11 @@
 /dist
 .parcel-cache
 .vite
+/firestore.rules
+/firestore.indexes.json
+/firebase.js
+/firebase.json
+/functions
+/database.rules.json
+/postcss.config.js
+*.DS_Store

@@ -1,21 +1,51 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
-import { createBrowserRouter, RouterProvider } from "react-router"
+import React, { lazy, Suspense } from "react";
+import {
+  createBrowserRouter,
+  Outlet,
+  Navigate
+} from "react-router-dom";
+import LoginScreen from "./pages/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 
-const AppLayout = () => {
-    return (
-        <div className="app">
-           Home Page
-        </div>
-    )
-}
+const Dashboard = lazy(() => import("./pages/Dashboard")); // You can create this later
+
+const AppLayout = () => (
+  <div>
+    <Outlet />
+  </div>
+);
 
 const appRouter = createBrowserRouter([
-    {
-        path: "/",
-        element: <AppLayout />,
-    },
-])
+  {
+    path: "/",
+    element: <LoginScreen />
+  },
+  {
+    path: "/app",
+    element: (
+      <ProtectedRoute>
+        <AppLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "dashboard",
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Dashboard />
+          </Suspense>
+        ),
+      },
+      {
+        path: "*",
+        element: <Navigate to="/app/dashboard" />
+      }
+    ]
+  },
+  {
+    path: "*",
+    element: <Navigate to="/" />
+  }
+]);
 
-const root = ReactDOM.createRoot(document.getElementById("root"))
-root.render(<RouterProvider router={appRouter} />)
+export default appRouter;
