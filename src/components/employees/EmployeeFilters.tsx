@@ -1,5 +1,6 @@
-import React from 'react';
-import { projects } from '../../utils/projects';
+import React from "react";
+import useCollection from "../../hooks/useCollection";
+import { Project } from "../../types";
 
 interface EmployeeFiltersProps {
   departments: string[];
@@ -18,16 +19,31 @@ const EmployeeFilters: React.FC<EmployeeFiltersProps> = ({
   techSkillFilter,
   onDepartmentChange,
   onProjectChange,
-  onTechSkillChange
+  onTechSkillChange,
 }) => {
   // Fetch all active projects
 
   // Common tech skills (in a real app, these might be fetched from a config)
   const commonTechSkills = [
-    'React', 'Angular', 'Vue', 'Node.js', 'Python', 
-    'Java', 'C#', '.NET', 'AWS', 'Azure', 'DevOps',
-    'UI/UX', 'Product Management', 'Scrum Master'
+    "React",
+    "Angular",
+    "Vue",
+    "Node.js",
+    "Python",
+    "Java",
+    "C#",
+    ".NET",
+    "AWS",
+    "Azure",
+    "DevOps",
+    "UI/UX",
+    "Product Management",
+    "Scrum Master",
   ];
+
+  const { documents: projects } = useCollection<Project>("projects", [
+    { field: "status", operator: "==", value: "active" },
+  ]);
 
   return (
     <div className="bg-white p-4 rounded-lg shadow mb-6">
@@ -36,44 +52,52 @@ const EmployeeFilters: React.FC<EmployeeFiltersProps> = ({
         {/* Department Filter */}
         <div>
           <label className="block text-sm font-medium mb-1">Department</label>
-          <select 
+          <select
             className="w-full p-2 border rounded"
             value={selectedDepartment}
             onChange={(e) => onDepartmentChange(e.target.value)}
           >
             <option value="">All Departments</option>
-            {departments.map((dept, index) => (
-              <option key={index} value={dept}>{dept}</option>
-            ))}
+            {departments
+              ?.filter((item) => item)
+              .map((dept, index) => (
+                <option key={index} value={dept}>
+                  {dept}
+                </option>
+              ))}
           </select>
         </div>
-        
+
         {/* Project Filter */}
         <div>
           <label className="block text-sm font-medium mb-1">Project</label>
-          <select 
+          <select
             className="w-full p-2 border rounded"
             value={selectedProject}
             onChange={(e) => onProjectChange(e.target.value)}
           >
             <option value="">All Projects</option>
-            {projects.map(project => (
-              <option key={project.id} value={project.id}>{project.displayName}</option>
+            {projects.map((project) => (
+              <option key={project.id} value={project.id}>
+                {project?.name ?? ""}
+              </option>
             ))}
           </select>
         </div>
-        
+
         {/* Tech Skills Filter */}
         <div>
           <label className="block text-sm font-medium mb-1">Tech Skills</label>
-          <select 
+          <select
             className="w-full p-2 border rounded"
             value={techSkillFilter}
             onChange={(e) => onTechSkillChange(e.target.value)}
           >
             <option value="">All Skills</option>
             {commonTechSkills.map((skill, index) => (
-              <option key={index} value={skill}>{skill}</option>
+              <option key={index} value={skill}>
+                {skill}
+              </option>
             ))}
           </select>
         </div>

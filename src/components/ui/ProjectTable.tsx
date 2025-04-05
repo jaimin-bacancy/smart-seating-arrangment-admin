@@ -1,17 +1,18 @@
-import React from 'react';
-import { User } from '../../types';
-import { WithId } from '../../types/firebase';
+import React from "react";
+import { User } from "../../types";
+import { WithId } from "../../types/firebase";
 
 interface EmployeeTableProps {
-    projects: WithId<User>[];
+  projects: WithId<User>[];
   onEdit: (employee: WithId<User>) => void;
   onRemove: (employeeId: string) => void;
 }
 
-const ProjectTable: React.FC<EmployeeTableProps> = ({ 
-projects, 
-  onEdit, 
-  onRemove 
+const ProjectTable: React.FC<EmployeeTableProps> = ({
+  projects,
+  memberDetails,
+  onEdit,
+  onRemove,
 }) => {
   return (
     <div className="overflow-hidden shadow rounded-lg">
@@ -25,43 +26,54 @@ projects,
               Tech Skills
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Team
+              Members
             </th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {projects.map((employee, index) => (
-            <tr key={employee.id}>
+          {projects.map((project, index) => (
+            <tr key={project.id}>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
                   <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
-                    {employee.displayName.charAt(0).toUpperCase()}
+                    {project?.name.charAt(0).toUpperCase()}
                   </div>
                   <div className="ml-4">
-                    <div className="text-sm font-medium text-gray-900">{employee.displayName}</div>
-                    <div className="text-sm text-gray-500">{employee.email}</div>
+                    <div className="text-sm font-medium text-gray-900">
+                      {project?.name}
+                    </div>
+                    <div className="text-sm text-gray-500">{project.email}</div>
                   </div>
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm text-gray-900 space-x-1">
-                  {employee.techSkills.map((skill, i) => (
-                    <span key={i} className="px-2 py-1 bg-[#E7873C] rounded text-xs">
+                  {project.techStack.map((skill, i) => (
+                    <span
+                      key={i}
+                      className="px-2 py-1 bg-[#E7873C] rounded text-xs"
+                    >
                       {skill}
                     </span>
                   ))}
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className="px-2 inline-flex text-xs leading-5 rounded-full text-xs">
-                {employee.team.map((item, i) => (
-                    <span key={i} className="px-2 py-1 mr-2 bg-[#E7873C] rounded text-xs">
-                      {item.displayName}
-                    </span>
-                  ))}
+                <span className="px-2 inline-flex text-xs leading-5 rounded-full">
+                  {project.teamMembers.map((member) => {
+                    const cleanedId = member.id.replace("/users/", "");
+                    const name = memberDetails[cleanedId] || "Loading...";
+                    return (
+                      <span
+                        key={member.id}
+                        className="px-2 py-1 mr-2 bg-[#E7873C] text-xs font-bold rounded-full"
+                      >
+                        {name?.charAt(0)}
+                      </span>
+                    );
+                  })}
                 </span>
               </td>
-
             </tr>
           ))}
         </tbody>

@@ -1,66 +1,88 @@
-
-import { getAuth } from 'firebase/auth';
-import React, { useState } from 'react';
-import { useUI } from '../../contexts/UIContext';
-import { User, UserRole } from '../../types';
-import { isValidEmail } from '../../utils/validators';
+import { getAuth } from "firebase/auth";
+import React, { useState } from "react";
+import { useUI } from "../../contexts/UIContext";
+import { User, UserRole } from "../../types";
+import { isValidEmail } from "../../utils/validators";
 interface AddEmployeeModalProps {
   onClose: () => void;
   onSuccess: () => void;
 }
 
-const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ onClose, onSuccess }) => {
+const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({
+  onClose,
+  onSuccess,
+}) => {
   const { showToast } = useUI();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    displayName: '',
-    email: '',
-    password: 'Bacancy@123', // Default password that employee will change upon first login
-    role: 'employee' as UserRole,
-    department: 'Engineering',
-    employeeId: '',
-    techSkills: [] as string[]
+    displayName: "",
+    email: "",
+    password: "Bacancy@123", // Default password that employee will change upon first login
+    role: "employee" as UserRole,
+    department: "Engineering",
+    employeeId: "",
+    techSkills: [] as string[],
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Departments
   const departments = [
-    'Engineering', 'Product', 'Design', 'Marketing', 'Sales',
-    'Customer Support', 'HR', 'Finance', 'Operations'
+    "Engineering",
+    "Product",
+    "Design",
+    "Marketing",
+    "Sales",
+    "Customer Support",
+    "HR",
+    "Finance",
+    "Operations",
   ];
 
   // Common tech skills
   const commonTechSkills = [
-    'React', 'Angular', 'Vue', 'Node.js', 'Python', 
-    'Java', 'C#', '.NET', 'AWS', 'Azure', 'DevOps',
-    'UI/UX', 'Product Management', 'Scrum Master'
+    "React",
+    "Angular",
+    "Vue",
+    "Node.js",
+    "Python",
+    "Java",
+    "C#",
+    ".NET",
+    "AWS",
+    "Azure",
+    "DevOps",
+    "UI/UX",
+    "Product Management",
+    "Scrum Master",
   ];
 
   // Handle input changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
     // Clear error when field is changed
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
   // Handle tech skill toggle
   const handleSkillToggle = (skill: string) => {
-    setFormData(prev => {
+    setFormData((prev) => {
       const skills = [...prev.techSkills];
-      
+
       if (skills.includes(skill)) {
         return {
           ...prev,
-          techSkills: skills.filter(s => s !== skill)
+          techSkills: skills.filter((s) => s !== skill),
         };
       } else {
         return {
           ...prev,
-          techSkills: [...skills, skill]
+          techSkills: [...skills, skill],
         };
       }
     });
@@ -69,21 +91,21 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ onClose, onSuccess 
   // Validate form
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.displayName.trim()) {
-      newErrors.displayName = 'Name is required';
+      newErrors.displayName = "Name is required";
     }
-    
+
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!isValidEmail(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = "Please enter a valid email address";
     }
-    
+
     if (!formData.employeeId.trim()) {
-      newErrors.employeeId = 'Employee ID is required';
+      newErrors.employeeId = "Employee ID is required";
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -91,21 +113,21 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ onClose, onSuccess 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
-    
+
     setLoading(true);
-    
+
     try {
       // Extract user data
-      const userData: Omit<User, 'id'> = {
+      const userData: Omit<User, "id"> = {
         displayName: formData.displayName,
         email: formData.email,
         role: formData.role,
         department: formData.department,
         employeeId: formData.employeeId,
         techSkills: formData.techSkills,
-        currentProjects: []
+        currentProjects: [],
       };
 
       const auth = getAuth();
@@ -113,24 +135,34 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ onClose, onSuccess 
 
       // Register the user
       // await AuthService.registerUser(formData.email, formData.password, userData);
-      const response = await fetch("https://us-central1-smart-seating-app-7a1b6.cloudfunctions.net/createUser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${idToken}`, // 🔐 Must be set
-        },
-        body: JSON.stringify(userData),
-      });
-    
+      const response = await fetch(
+        "https://us-central1-smart-seating-app-7a1b6.cloudfunctions.net/createUser",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`, // 🔐 Must be set
+          },
+          body: JSON.stringify(userData),
+        }
+      );
+
       const data = await response.json();
-  
-      
-      showToast('Employee added successfully!', 'success');
+
       onSuccess();
       onClose();
+      if (data?.error) {
+        showToast(data?.error, "error");
+        return;
+      }
+
+      showToast("Employee added successfully!", "success");
     } catch (error) {
       // console.error('Error adding employee:::', error?.message);
-      showToast(error instanceof Error ? error.message : 'Failed to add employee', 'error');
+      showToast(
+        error instanceof Error ? error.message : "Failed to add employee",
+        "error"
+      );
     } finally {
       setLoading(false);
     }
@@ -139,29 +171,37 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ onClose, onSuccess 
   return (
     <div className="p-4">
       <h2 className="text-lg font-medium">Add New Employee</h2>
-      
+
       <form onSubmit={handleSubmit}>
         <div>
           {/* Basic Information */}
           <div>
-            <h3 className="font-medium text-sm text-gray-500 mb-3">Basic Information</h3>
-            
+            <h3 className="font-medium text-sm text-gray-500 mb-3">
+              Basic Information
+            </h3>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Full Name</label>
+                <label className="block text-sm font-medium mb-1">
+                  Full Name
+                </label>
                 <input
                   type="text"
                   name="displayName"
                   value={formData.displayName}
                   onChange={handleChange}
-                  className={`w-full p-2 border rounded ${errors.displayName ? 'border-red-500' : ''}`}
+                  className={`w-full p-2 border rounded ${
+                    errors.displayName ? "border-red-500" : ""
+                  }`}
                   placeholder="John Doe"
                 />
                 {errors.displayName && (
-                  <p className="text-red-500 text-xs mt-1">{errors.displayName}</p>
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.displayName}
+                  </p>
                 )}
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium mb-1">Email</label>
                 <input
@@ -169,29 +209,37 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ onClose, onSuccess 
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full p-2 border rounded ${errors.email ? 'border-red-500' : ''}`}
+                  className={`w-full p-2 border rounded ${
+                    errors.email ? "border-red-500" : ""
+                  }`}
                   placeholder="email@example.com"
                 />
                 {errors.email && (
                   <p className="text-red-500 text-xs mt-1">{errors.email}</p>
                 )}
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium mb-1">Employee ID</label>
+                <label className="block text-sm font-medium mb-1">
+                  Employee ID
+                </label>
                 <input
                   type="text"
                   name="employeeId"
                   value={formData.employeeId}
                   onChange={handleChange}
-                  className={`w-full p-2 border rounded ${errors.employeeId ? 'border-red-500' : ''}`}
+                  className={`w-full p-2 border rounded ${
+                    errors.employeeId ? "border-red-500" : ""
+                  }`}
                   placeholder="EMP-12345"
                 />
                 {errors.employeeId && (
-                  <p className="text-red-500 text-xs mt-1">{errors.employeeId}</p>
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.employeeId}
+                  </p>
                 )}
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium mb-1">Role</label>
                 <select
@@ -206,21 +254,25 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ onClose, onSuccess 
                   <option value="admin">Administrator</option>
                 </select>
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium mb-1">Department</label>
+                <label className="block text-sm font-medium mb-1">
+                  Department
+                </label>
                 <select
                   name="department"
                   value={formData.department}
                   onChange={handleChange}
                   className="w-full p-2 border rounded"
                 >
-                  {departments.map(dept => (
-                    <option key={dept} value={dept}>{dept}</option>
+                  {departments.map((dept) => (
+                    <option key={dept} value={dept}>
+                      {dept}
+                    </option>
                   ))}
                 </select>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium mb-1">
                   Default Password
@@ -237,11 +289,13 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ onClose, onSuccess 
               </div>
             </div>
           </div>
-          
+
           {/* Tech Skills */}
           <div>
-            <h3 className="font-medium text-sm text-gray-500 mb-3">Technical Skills</h3>
-            
+            <h3 className="font-medium text-sm text-gray-500 mb-3">
+              Technical Skills
+            </h3>
+
             <div className="border rounded p-3 max-h-40 overflow-y-auto">
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {commonTechSkills.map((skill, index) => (
@@ -261,7 +315,7 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ onClose, onSuccess 
               </div>
             </div>
           </div>
-          
+
           {/* Form Actions */}
           <div className="flex justify-end space-x-3 pt-4">
             <button
@@ -277,7 +331,7 @@ const AddEmployeeModal: React.FC<AddEmployeeModalProps> = ({ onClose, onSuccess 
               className="px-4 py-2 bg-[#E7873C] text-white rounded hover:bg-blue-700 disabled:bg-blue-300"
               disabled={loading}
             >
-              {loading ? 'Adding...' : 'Add Employee'}
+              {loading ? "Adding..." : "Add Employee"}
             </button>
           </div>
         </div>

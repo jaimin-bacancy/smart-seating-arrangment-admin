@@ -1,6 +1,6 @@
-import React from 'react';
-import { User } from '../../types';
-import { WithId } from '../../types/firebase';
+import React from "react";
+import { User } from "../../types";
+import { WithId } from "../../types/firebase";
 
 interface EmployeeTableProps {
   employees: WithId<User>[];
@@ -8,11 +8,12 @@ interface EmployeeTableProps {
   onRemove: (employeeId: string) => void;
 }
 
-const EmployeeTable: React.FC<EmployeeTableProps> = ({ 
-  employees, 
-  onEdit, 
-  onRemove 
+const EmployeeTable: React.FC<EmployeeTableProps> = ({
+  employees,
+  onEdit,
+  onRemove,
 }) => {
+  console.log("employee :>> ", employees);
   return (
     <div className="overflow-hidden shadow rounded-lg">
       <table className="min-w-full divide-y divide-gray-200">
@@ -44,8 +45,12 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
                     {employee.displayName.charAt(0).toUpperCase()}
                   </div>
                   <div className="ml-4">
-                    <div className="text-sm text-gray-900">{employee.displayName}</div>
-                    <div className="text-sm text-gray-500">{employee.email}</div>
+                    <div className="text-sm text-gray-900">
+                      {employee.displayName}
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      {employee.email}
+                    </div>
                   </div>
                 </div>
               </td>
@@ -57,7 +62,10 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm text-gray-900 space-x-1">
                   {employee.techSkills.map((skill, i) => (
-                    <span key={i} className="px-2 py-1 bg-[#E7873C] rounded text-xs">
+                    <span
+                      key={i}
+                      className="px-2 py-1 bg-[#E7873C] rounded text-xs"
+                    >
                       {skill}
                     </span>
                   ))}
@@ -65,16 +73,15 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 {/* This would need to be fetched from the seat assignment */}
-                Floor 1, Seat {10 + index}
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button 
+                <button
                   className="text-blue-600 hover:text-blue-900 mr-3"
                   onClick={() => onEdit(employee)}
                 >
-                  Edit
+                  View
                 </button>
-                <button 
+                <button
                   className="text-red-600 hover:text-red-900"
                   onClick={() => onRemove(employee.id)}
                 >
