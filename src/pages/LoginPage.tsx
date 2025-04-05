@@ -108,47 +108,12 @@ const LoginPage: React.FC = () => {
           </div>
           <button 
             type="submit"
-            className={`w-full py-2 bg-[#E7873C] text-white rounded hover:bg-blue-700 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+            className={`w-full py-2 bg-[#E7873C] text-white rounded ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
             disabled={loading}
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
-        
-        <div className="mt-6">
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or continue with</span>
-            </div>
-          </div>
-          
-          <div className="mt-6">
-            <button
-              onClick={handleDemoLogin}
-              className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-              disabled={loading}
-            >
-              Demo Account
-            </button>
-          </div>
-        </div>
-        
-        <div className="mt-4 text-center">
-          <div className="text-sm text-gray-600">
-            <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
-              Forgot your password?
-            </a>
-          </div>
-          <div className="text-sm text-gray-600 mt-2">
-            Don't have an account?{' '}
-            <a href="/signup" className="font-medium text-blue-600 hover:text-blue-500">
-              Sign up
-            </a>
-          </div>
-        </div>
       </div>
     </div>
   );
