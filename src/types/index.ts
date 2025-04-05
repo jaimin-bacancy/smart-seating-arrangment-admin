@@ -1,9 +1,16 @@
 // Type definitions for the Smart Office application
-import { FirestoreReference, Timestamp } from './firebase';
+import { FirestoreReference, Timestamp } from "./firebase";
 
-export type TabType = 'dashboard' | 'layout' | 'employees' | 'algorithm' | 'reports' | 'profile' | 'notifications';
+export type TabType =
+  | "dashboard"
+  | "layout"
+  | "employees"
+  | "algorithm"
+  | "reports"
+  | "profile"
+  | "notifications";
 
-export type UserRole = 'admin' | 'doe' | 'pm' | 'employee';
+export type UserRole = "admin" | "doe" | "pm" | "employee";
 
 export interface User {
   id: string;
@@ -35,7 +42,12 @@ export interface Floor {
   maxSeats: number;
 }
 
-export type ZoneType = 'team_area' | 'meeting' | 'break_room' | 'quiet_area' | 'collaboration';
+export type ZoneType =
+  | "team_area"
+  | "meeting"
+  | "break_room"
+  | "quiet_area"
+  | "collaboration";
 
 export interface Zone {
   id: string;
@@ -46,12 +58,13 @@ export interface Zone {
   color: string;
 }
 
-export type SeatType = 'desk' | 'standing_desk' | 'meeting' | 'phone_booth';
-export type SeatStatus = 'available' | 'occupied' | 'reserved' | 'maintenance';
+export type SeatType = "desk" | "standing_desk" | "meeting" | "phone_booth";
+export type SeatStatus = "available" | "occupied" | "reserved" | "maintenance";
 
 export interface Seat {
   id: string;
   label: string;
+  floorName: string;
   floorId: FirestoreReference;
   zoneId: FirestoreReference;
   type: SeatType;
@@ -60,7 +73,7 @@ export interface Seat {
   lastModified: Timestamp;
 }
 
-export type ProjectStatus = 'planning' | 'active' | 'completed';
+export type ProjectStatus = "planning" | "active" | "completed";
 
 export interface Project {
   id: string;
@@ -102,8 +115,8 @@ export interface SeatingPlan {
   optimizationScore: number;
 }
 
-export type NotificationType = 'seat_change' | 'maintenance' | 'announcement';
-export type NotificationPriority = 'low' | 'medium' | 'high';
+export type NotificationType = "seat_change" | "maintenance" | "announcement";
+export type NotificationPriority = "low" | "medium" | "high";
 
 export interface NotificationAction {
   type: string;
@@ -122,7 +135,7 @@ export interface Notification {
   action?: NotificationAction;
 }
 
-export type ChangeRequestStatus = 'pending' | 'approved' | 'rejected';
+export type ChangeRequestStatus = "pending" | "approved" | "rejected";
 
 export interface SeatChangeRequest {
   id: string;
