@@ -8,11 +8,11 @@ interface OfficeStatsProps {
 
 const OfficeStats: React.FC<OfficeStatsProps> = ({ stats }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 pt-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 pt-4">
       <StatCard title="Total Employees" value={stats.totalEmployees} />
       <StatCard title="Occupied Seats" value={stats.occupiedSeats} />
       <StatCard title="Available Seats" value={stats.availableSeats} />
-      <StatCard title="Collaboration Score" value={stats.collaborationScore} suffix="%" />
+      {/* <StatCard title="Collaboration Score" value={stats.collaborationScore} suffix="%" /> */}
     </div>
   );
 };

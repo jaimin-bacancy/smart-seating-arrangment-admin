@@ -100,10 +100,7 @@ const Dashboard: React.FC = () => {
         <>
           {/* Stats Cards */}
           <OfficeStats stats={officeStats} />
-          
-          {/* Office Layout Preview */}
-          <OfficeLayoutMap />
-          
+                    
           {/* Project Distribution */}
           <ProjectDistribution 
             projects={projects} 
