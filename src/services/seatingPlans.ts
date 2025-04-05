@@ -2,7 +2,7 @@ import { firestore } from '../config/firebaseConfig';
 import { SeatingPlan, AlgorithmParameters } from '../types';
 import { FirestoreService } from './firebase';
 import { WithId } from '../types/firebase';
-
+import { Timestamp } from 'firebase/firestore';
 const COLLECTION = 'seating_plans';
 
 // Seating plans service
@@ -80,7 +80,7 @@ export const SeatingPlanService = {
       const planRef = firestore.collection(COLLECTION).doc(id);
       batch.update(planRef, { 
         isActive: true,
-        effectiveFrom: firestore.Timestamp.now()
+        effectiveFrom: Timestamp.now()
       });
       
       // Commit the batch
@@ -96,7 +96,7 @@ export const SeatingPlanService = {
     try {
       await firestore.collection(COLLECTION).doc(id).update({
         algorithmParameters: params,
-        updatedAt: firestore.Timestamp.now()
+        updatedAt: Timestamp.now()
       });
     } catch (error) {
       console.error(`Error updating algorithm parameters for plan ${id}:`, error);

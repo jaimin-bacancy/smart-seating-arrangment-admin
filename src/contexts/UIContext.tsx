@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { log } from 'util';
 
 interface ModalConfig {
   isOpen: boolean;
@@ -103,6 +104,7 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
   
   // Modal functions
   const openModal = (title: string, content: React.ReactNode, onClose = () => {}) => {
+    console.log('openModal called');
     setModal({
       isOpen: true,
       title,
@@ -186,7 +188,7 @@ export const UIProvider: React.FC<UIProviderProps> = ({ children }) => {
   return (
     <UIContext.Provider value={value}>
       {children}
-      
+      {console.log('modal.isOpen::', modal.isOpen)}
       {/* Render Modal */}
       {modal.isOpen && (
         <div className="fixed z-50 inset-0 overflow-y-auto">

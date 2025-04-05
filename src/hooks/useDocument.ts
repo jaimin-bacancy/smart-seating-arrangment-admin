@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { firestore } from '../config/firebaseConfig';
 import { WithId } from '../types/firebase';
-
+import { Timestamp } from 'firebase/firestore';
 // Hook for fetching and tracking a single document
 export const useDocument = <T>(collection: string, id: string | null) => {
   const [document, setDocument] = useState<WithId<T> | null>(null);
@@ -46,7 +46,7 @@ export const useDocument = <T>(collection: string, id: string | null) => {
     try {
       await firestore.collection(collection).doc(id).update({
         ...data,
-        updatedAt: firestore.Timestamp.now()
+        updatedAt: Timestamp.now()
       });
     } catch (err) {
       setError(err as Error);

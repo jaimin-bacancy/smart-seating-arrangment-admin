@@ -2,7 +2,7 @@ import { firestore } from '../config/firebaseConfig';
 import { Project, ProjectStatus } from '../types';
 import { FirestoreService } from './firebase';
 import { WithId } from '../types/firebase';
-
+import { arrayRemove, arrayUnion } from 'firebase/firestore';
 const COLLECTION = 'projects';
 
 // Service for managing projects
@@ -110,12 +110,12 @@ export const ProjectService = {
       
       // Add user to project's team members
       await projectRef.update({
-        teamMembers: firestore.FieldValue.arrayUnion(userRef)
+        teamMembers: arrayUnion(userRef)
       });
       
       // Add project to user's current projects
       await userRef.update({
-        currentProjects: firestore.FieldValue.arrayUnion(projectRef)
+        currentProjects: arrayUnion(projectRef)
       });
     } catch (error) {
       console.error(`Error adding user ${userId} to project ${projectId}:`, error);
@@ -131,12 +131,12 @@ export const ProjectService = {
       
       // Remove user from project's team members
       await projectRef.update({
-        teamMembers: firestore.FieldValue.arrayRemove(userRef)
+        teamMembers: arrayRemove(userRef)
       });
       
       // Remove project from user's current projects
       await userRef.update({
-        currentProjects: firestore.FieldValue.arrayRemove(projectRef)
+        currentProjects: arrayRemove(projectRef)
       });
     } catch (error) {
       console.error(`Error removing user ${userId} from project ${projectId}:`, error);

@@ -3,6 +3,7 @@ import { firestore } from '../config/firebaseConfig';
 import { useAuth } from './AuthContext';
 import { Notification } from '../types';
 import { WithId } from '../types/firebase';
+import { arrayRemove, arrayUnion } from 'firebase/firestore';
 
 interface NotificationContextProps {
   notifications: WithId<Notification>[];
@@ -77,7 +78,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
       const userRef = firestore.collection('users').doc(currentUser.uid);
       
       await firestore.collection('notifications').doc(notificationId).update({
-        readBy: firestore.FieldValue.arrayUnion(userRef)
+        readBy: arrayUnion(userRef)
       });
     } catch (error) {
       console.error('Error marking notification as read:', error);
@@ -97,7 +98,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
         if (!notification.readBy?.some(ref => ref.id === currentUser.uid)) {
           const notificationRef = firestore.collection('notifications').doc(notification.id);
           batch.update(notificationRef, {
-            readBy: firestore.FieldValue.arrayUnion(userRef)
+            readBy: arrayUnion(userRef)
           });
         }
       });
@@ -116,7 +117,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
       const userRef = firestore.collection('users').doc(currentUser.uid);
       
       await firestore.collection('notifications').doc(notificationId).update({
-        recipients: firestore.FieldValue.arrayRemove(userRef)
+        recipients: arrayRemove(userRef)
       });
     } catch (error) {
       console.error('Error clearing notification:', error);

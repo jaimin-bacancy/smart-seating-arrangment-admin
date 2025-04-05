@@ -2,7 +2,7 @@ import { firestore } from '../config/firebaseConfig';
 import { Zone, ZoneType } from '../types';
 import { FirestoreService } from './firebase';
 import { WithId } from '../types/firebase';
-
+import { arrayRemove, arrayUnion } from 'firebase/firestore';
 const COLLECTION = 'zones';
 
 // Service for managing zones
@@ -33,7 +33,7 @@ export const ZoneService = {
       
       // Add the zone to the floor's zones array
       await floorRef.update({
-        zones: firestore.FieldValue.arrayUnion(
+        zones: arrayUnion(
           firestore.collection(COLLECTION).doc(zoneId)
         )
       });
@@ -70,7 +70,7 @@ export const ZoneService = {
       
       // Remove the zone from the floor's zones array
       await floorRef.update({
-        zones: firestore.FieldValue.arrayRemove(zoneRef)
+        zones: arrayRemove(zoneRef)
       });
       
       // Delete the zone
@@ -121,7 +121,7 @@ export const ZoneService = {
       const seatRef = firestore.collection('seats').doc(seatId);
       
       await firestore.collection(COLLECTION).doc(zoneId).update({
-        seats: firestore.FieldValue.arrayUnion(seatRef)
+        seats: arrayUnion(seatRef)
       });
     } catch (error) {
       console.error(`Error adding seat ${seatId} to zone ${zoneId}:`, error);
@@ -135,7 +135,7 @@ export const ZoneService = {
       const seatRef = firestore.collection('seats').doc(seatId);
       
       await firestore.collection(COLLECTION).doc(zoneId).update({
-        seats: firestore.FieldValue.arrayRemove(seatRef)
+        seats: arrayRemove(seatRef)
       });
     } catch (error) {
       console.error(`Error removing seat ${seatId} from zone ${zoneId}:`, error);

@@ -2,7 +2,7 @@ import { firestore } from '../config/firebaseConfig';
 import { OfficeLayout } from '../types';
 import { FirestoreService } from './firebase';
 import { WithId } from '../types/firebase';
-
+import { Timestamp } from 'firebase/firestore';
 const COLLECTION = 'office_layouts';
 
 // Service for managing office layouts
@@ -14,8 +14,8 @@ export const LayoutService = {
         name,
         floors: [],
         isActive: false,
-        createdAt: firestore.Timestamp.now(),
-        modifiedAt: firestore.Timestamp.now()
+        createdAt: Timestamp.now(),
+        modifiedAt: Timestamp.now()
       };
       
       return FirestoreService.createDocument<Omit<OfficeLayout, 'id'>>(
@@ -38,7 +38,7 @@ export const LayoutService = {
     // Ensure modifiedAt is updated
     const updateData = {
       ...data,
-      modifiedAt: firestore.Timestamp.now()
+      modifiedAt: Timestamp.now()
     };
     
     return FirestoreService.updateDocument<OfficeLayout>(COLLECTION, id, updateData);
@@ -93,7 +93,7 @@ export const LayoutService = {
       snapshot.docs.forEach(doc => {
         batch.update(doc.ref, { 
           isActive: false,
-          modifiedAt: firestore.Timestamp.now()
+          modifiedAt: Timestamp.now()
         });
       });
       
@@ -101,7 +101,7 @@ export const LayoutService = {
       const layoutRef = firestore.collection(COLLECTION).doc(id);
       batch.update(layoutRef, { 
         isActive: true,
-        modifiedAt: firestore.Timestamp.now()
+        modifiedAt: Timestamp.now()
       });
       
       // Commit the batch

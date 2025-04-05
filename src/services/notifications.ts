@@ -7,7 +7,7 @@ import {
 } from '../types';
 import { FirestoreService } from './firebase';
 import { WithId } from '../types/firebase';
-
+import { arrayUnion, Timestamp } from 'firebase/firestore';
 const COLLECTION = 'notifications';
 
 // Service for managing notifications
@@ -33,7 +33,7 @@ export const NotificationService = {
         recipients: recipientRefs,
         type,
         priority,
-        createdAt: firestore.Timestamp.now(),
+        createdAt: Timestamp.now(),
         readBy: []
       };
       
@@ -109,7 +109,7 @@ export const NotificationService = {
       const userRef = firestore.collection('users').doc(userId);
       
       await firestore.collection(COLLECTION).doc(notificationId).update({
-        readBy: firestore.FieldValue.arrayUnion(userRef)
+        readBy: arrayUnion(userRef)
       });
     } catch (error) {
       console.error(`Error marking notification ${notificationId} as read:`, error);
@@ -129,7 +129,7 @@ export const NotificationService = {
       unreadNotifications.forEach(notification => {
         const notificationRef = firestore.collection(COLLECTION).doc(notification.id);
         batch.update(notificationRef, {
-          readBy: firestore.FieldValue.arrayUnion(userRef)
+          readBy: arrayUnion(userRef)
         });
       });
       

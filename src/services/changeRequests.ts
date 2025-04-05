@@ -2,7 +2,7 @@ import { firestore } from '../config/firebaseConfig';
 import { SeatChangeRequest, ChangeRequestStatus } from '../types';
 import { FirestoreService } from './firebase';
 import { WithId } from '../types/firebase';
-
+import { Timestamp } from 'firebase/firestore';
 const COLLECTION = 'seat_change_requests';
 
 // Service for managing seat change requests
@@ -24,8 +24,8 @@ export const ChangeRequestService = {
         currentSeatId: seatRef,
         reason,
         status: 'pending',
-        createdAt: firestore.Timestamp.now(),
-        updatedAt: firestore.Timestamp.now()
+        createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now()
       };
       
       // Add preferred zone if provided
@@ -96,7 +96,7 @@ export const ChangeRequestService = {
         status: 'approved',
         approver: approverRef,
         notes,
-        updatedAt: firestore.Timestamp.now()
+        updatedAt: Timestamp.now()
       });
     } catch (error) {
       console.error(`Error approving change request ${requestId}:`, error);
@@ -117,7 +117,7 @@ export const ChangeRequestService = {
         status: 'rejected',
         approver: approverRef,
         notes,
-        updatedAt: firestore.Timestamp.now()
+        updatedAt: Timestamp.now()
       });
     } catch (error) {
       console.error(`Error rejecting change request ${requestId}:`, error);

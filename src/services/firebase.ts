@@ -1,6 +1,6 @@
 import { firestore } from '../config/firebaseConfig';
 import { WithId } from '../types/firebase';
-
+import { Timestamp } from 'firebase/firestore';
 // Generic Firestore service with common CRUD operations
 export const FirestoreService = {
   // Create a document
@@ -8,8 +8,8 @@ export const FirestoreService = {
     try {
       const docRef = await firestore.collection(collection).add({
         ...data,
-        createdAt: firestore.Timestamp.now(),
-        updatedAt: firestore.Timestamp.now(),
+        createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now(),
       });
       return docRef.id;
     } catch (error) {
@@ -42,7 +42,7 @@ export const FirestoreService = {
     try {
       await firestore.collection(collection).doc(id).update({
         ...data,
-        updatedAt: firestore.Timestamp.now(),
+        updatedAt: Timestamp.now(),
       });
     } catch (error) {
       console.error(`Error updating document ${id} in ${collection}:`, error);

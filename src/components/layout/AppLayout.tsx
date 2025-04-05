@@ -31,10 +31,6 @@ const AppLayout: React.FC = () => {
         return <OfficeLayoutPage />;
       case 'employees':
         return <EmployeesPage />;
-      case 'algorithm':
-        return <AlgorithmPage />;
-      case 'reports':
-        return <ReportsPage />;
       default:
         return <Dashboard />;
     }

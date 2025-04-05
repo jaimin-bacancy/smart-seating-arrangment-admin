@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { firestore } from '../config/firebaseConfig';
 import { WithId } from '../types/firebase';
-
+import { Timestamp } from 'firebase/firestore';
 // Generic hook for CRUD operations on Firestore
 export const useFirestore = <T>(collection: string) => {
   const [documents, setDocuments] = useState<WithId<T>[]>([]);
@@ -13,8 +13,8 @@ export const useFirestore = <T>(collection: string) => {
     try {
       const docRef = await firestore.collection(collection).add({
         ...data,
-        createdAt: firestore.Timestamp.now(),
-        updatedAt: firestore.Timestamp.now()
+        createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now()
       });
       return docRef.id;
     } catch (err) {
@@ -28,7 +28,7 @@ export const useFirestore = <T>(collection: string) => {
     try {
       await firestore.collection(collection).doc(id).update({
         ...data,
-        updatedAt: firestore.Timestamp.now()
+        updatedAt: Timestamp.now()
       });
     } catch (err) {
       setError(err as Error);

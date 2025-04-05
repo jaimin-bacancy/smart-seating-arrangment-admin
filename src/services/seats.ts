@@ -3,7 +3,7 @@ import { Seat, SeatStatus, SeatType } from '../types';
 import { FirestoreService } from './firebase';
 import { WithId } from '../types/firebase';
 import { NotificationService } from './notifications';
-
+import { arrayRemove, arrayUnion, Timestamp } from 'firebase/firestore';
 const COLLECTION = 'seats';
 
 // Service for managing seats
@@ -26,7 +26,7 @@ export const SeatService = {
         zoneId: zoneRef,
         type,
         status,
-        lastModified: firestore.Timestamp.now()
+        lastModified: Timestamp.now()
       };
       
       // Create the seat
@@ -37,7 +37,7 @@ export const SeatService = {
       
       // Add the seat to the zone's seats array
       await zoneRef.update({
-        seats: firestore.FieldValue.arrayUnion(
+        seats: arrayUnion(
           firestore.collection(COLLECTION).doc(seatId)
         )
       });
@@ -59,7 +59,7 @@ export const SeatService = {
     // Ensure lastModified is updated
     const updateData = {
       ...data,
-      lastModified: firestore.Timestamp.now()
+      lastModified: Timestamp.now()
     };
     
     return FirestoreService.updateDocument<Seat>(COLLECTION, id, updateData);
@@ -73,7 +73,7 @@ export const SeatService = {
       
       // Remove the seat from the zone's seats array
       await zoneRef.update({
-        seats: firestore.FieldValue.arrayRemove(seatRef)
+        seats: arrayRemove(seatRef)
       });
       
       // Delete the seat
@@ -151,7 +151,7 @@ export const SeatService = {
       await firestore.collection(COLLECTION).doc(seatId).update({
         status: 'occupied',
         assignedTo: userRef,
-        lastModified: firestore.Timestamp.now()
+        lastModified: Timestamp.now()
       });
       
       // Get seat details for notification
@@ -177,7 +177,7 @@ export const SeatService = {
       await firestore.collection(COLLECTION).doc(seatId).update({
         status: 'available',
         assignedTo: firestore.FieldValue.delete(),
-        lastModified: firestore.Timestamp.now()
+        lastModified: Timestamp.now()
       });
     } catch (error) {
       console.error(`Error unassigning seat ${seatId}:`, error);
@@ -231,7 +231,7 @@ export const SeatService = {
       // Update seat status
       await firestore.collection(COLLECTION).doc(seatId).update({
         status: 'maintenance',
-        lastModified: firestore.Timestamp.now()
+        lastModified: Timestamp.now()
       });
     } catch (error) {
       console.error(`Error setting seat ${seatId} to maintenance:`, error);

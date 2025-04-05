@@ -3,7 +3,7 @@ import { firestore } from '../config/firebaseConfig';
 import { User, Project, Seat, AlgorithmParameters, SeatAssignment } from '../types';
 import { SeatingPlanService } from '../services/seatingPlans';
 import { WithId } from '../types/firebase';
-
+import { Timestamp } from 'firebase/firestore';
 // Hook for seating optimization algorithm
 export const useSeatingAlgorithm = () => {
   const [loading, setLoading] = useState(false);
@@ -131,7 +131,7 @@ export const useSeatingAlgorithm = () => {
       description,
       createdBy: firestore.collection('users').doc(createdById),
       isActive: false, // Not active until explicitly activated
-      effectiveFrom: firestore.Timestamp.now(),
+      effectiveFrom: Timestamp.now(),
       assignments,
       algorithmParameters: params,
       optimizationScore

@@ -1,4 +1,5 @@
 import { firestore, auth } from '../config/firebaseConfig';
+import { Timestamp } from 'firebase/firestore';
 import { User, UserRole } from '../types';
 import { FirestoreService } from './firebase';
 import { WithId } from '../types/firebase';
@@ -28,7 +29,7 @@ export const UserService = {
     try {
       await firestore.collection(COLLECTION).doc(id).set({
         ...userData,
-        createdAt: firestore.Timestamp.now(),
+        createdAt: Timestamp.now(),
       });
     } catch (error) {
       console.error('Error creating user:', error);

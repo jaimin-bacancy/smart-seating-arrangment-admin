@@ -1,6 +1,8 @@
 import React from 'react';
 import useCollection from '../../hooks/useCollection';
 import { Floor, Zone, Seat } from '../../types';
+import { firestore } from '../../config/firebaseConfig';
+import { arrayRemove, arrayUnion, doc, Timestamp } from 'firebase/firestore';
 
 interface OfficeLayoutMapProps {
   floorId?: string;
@@ -9,16 +11,18 @@ interface OfficeLayoutMapProps {
 }
 
 const OfficeLayoutMap: React.FC<OfficeLayoutMapProps> = ({ 
-  floorId,
+  floorId = 'eE8pu0AbTzD9AmdAFXeu',
   interactive = false,
   height = "h-64"
 }) => {
+  console.log('floorId:::', floorId)
   // Fetch zones and seats for the floor
   const { documents: zones, loading: loadingZones } = useCollection<Zone>(
     'zones',
-    floorId ? [{ field: 'floorId', operator: '==', value: floorId }] : []
+    floorId ? [{ field: 'floorId', operator: '==', value: doc(firestore, `/floors/${floorId}`) }] : []
   );
   
+  console.log('zones:::', zones)
   const { documents: seats, loading: loadingSeats } = useCollection<Seat>(
     'seats',
     floorId ? [{ field: 'floorId', operator: '==', value: floorId }] : []

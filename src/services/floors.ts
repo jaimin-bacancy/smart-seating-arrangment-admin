@@ -2,6 +2,7 @@ import { firestore } from '../config/firebaseConfig';
 import { Floor } from '../types';
 import { FirestoreService } from './firebase';
 import { WithId } from '../types/firebase';
+import { arrayRemove, arrayUnion } from "firebase/firestore";
 
 const COLLECTION = 'floors';
 
@@ -33,7 +34,7 @@ export const FloorService = {
       
       // Add the floor to the layout's floors array
       await layoutRef.update({
-        floors: firestore.FieldValue.arrayUnion(
+        floors: arrayUnion(
           firestore.collection(COLLECTION).doc(floorId)
         )
       });
@@ -63,7 +64,7 @@ export const FloorService = {
       
       // Remove the floor from the layout's floors array
       await layoutRef.update({
-        floors: firestore.FieldValue.arrayRemove(floorRef)
+        floors: arrayRemove(floorRef)
       });
       
       // Delete the floor

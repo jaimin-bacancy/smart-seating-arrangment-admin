@@ -4,6 +4,7 @@ import { firestore } from '../../config/firebaseConfig';
 import useCollection from '../../hooks/useCollection';
 import { User } from '../../types';
 import { WithId } from '../../types/firebase';
+import { arrayUnion, Timestamp } from 'firebase/firestore';
 
 interface SeatPropertiesProps {
   floorId: string | null;
@@ -69,7 +70,7 @@ const SeatProperties: React.FC<SeatPropertiesProps> = ({
         status: seatStatus,
         floorId: floorRef,
         zoneId: zoneRef,
-        lastModified: firestore.Timestamp.now()
+        lastModified: Timestamp.now()
       };
       
       // Add assigned user if selected
@@ -90,7 +91,7 @@ const SeatProperties: React.FC<SeatPropertiesProps> = ({
         
         // Add the seat to the zone's seats array
         await zoneRef.update({
-          seats: firestore.FieldValue.arrayUnion(seatRef)
+          seats: arrayUnion(seatRef)
         });
       }
       
