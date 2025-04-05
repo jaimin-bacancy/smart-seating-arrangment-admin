@@ -8,6 +8,7 @@ import OfficeLayoutPage from '../../pages/OfficeLayoutPage';
 import EmployeesPage from '../../pages/EmployeesPage';
 import AlgorithmPage from '../../pages/AlgorithmPage';
 import ReportsPage from '../../pages/ReportsPage';
+import ProjectsPage from '../../pages/ProjectsPage';
 
 const AppLayout: React.FC = () => {
   const { activeTab, setActiveTab } = useActiveTab();
@@ -31,6 +32,8 @@ const AppLayout: React.FC = () => {
         return <OfficeLayoutPage />;
       case 'employees':
         return <EmployeesPage />;
+      case 'projects':
+        return <ProjectsPage />;
       default:
         return <Dashboard />;
     }

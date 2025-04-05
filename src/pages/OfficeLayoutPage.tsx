@@ -501,7 +501,7 @@ const OfficeLayoutPage: React.FC = () => {
           )}
           
           {/* Zone Management and Seat Properties */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <ZoneManager 
               floorId={selectedFloorId}
               onAddZone={handleAddZone}
@@ -515,7 +515,7 @@ const OfficeLayoutPage: React.FC = () => {
               selectedSeatId={selectedSeatId}
               onSeatUpdate={handleSeatUpdate}
             />
-          </div>
+          </div> */}
         </>
       )}
     </div>

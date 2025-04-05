@@ -59,11 +59,13 @@ const SeatProperties: React.FC<SeatPropertiesProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!floorId || !zoneId) return;
+    // if (!floorId || !zoneId) return;
     
     try {
-      const floorRef = firestore.collection('floors').doc(floorId);
-      const zoneRef = firestore.collection('zones').doc(zoneId);
+      // const floorRef = firestore.collection('floors').doc(floorId);
+      // const zoneRef = firestore.collection('zones').doc(zoneId);
+      const floorRef = firestore.collection('floors').doc("eE8pu0AbTzD9AmdAFXeu");
+      const zoneRef = firestore.collection('zones').doc("HFbOwPEu8DaNCVrYtqcE");
       const seatData: Partial<Seat> = {
         label: seatLabel,
         type: seatType,
@@ -112,7 +114,7 @@ const SeatProperties: React.FC<SeatPropertiesProps> = ({
     <div className="bg-white p-4 rounded-lg shadow">
       <h3 className="font-bold mb-4">Seat Properties</h3>
       
-      {floorId && zoneId ? (
+      {true? (
         <form onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>

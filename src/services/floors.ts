@@ -13,7 +13,7 @@ export const FloorService = {
     name: string,
     level: number,
     layoutId: string,
-    maxSeats: number = 100
+    maxSeats: number = 72
   ): Promise<string> => {
     try {
       const layoutRef = firestore.collection('office_layouts').doc(layoutId);
