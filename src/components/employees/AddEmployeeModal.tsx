@@ -1,11 +1,9 @@
 
-import React, { useState } from 'react';
-import { AuthService } from '../../services/auth';
-import { UserService } from '../../services/users';
-import { User, UserRole } from '../../types';
-import { useUI } from '../../contexts/UIContext';
-import { isValidEmail } from '../../utils/validators';
 import { getAuth } from 'firebase/auth';
+import React, { useState } from 'react';
+import { useUI } from '../../contexts/UIContext';
+import { User, UserRole } from '../../types';
+import { isValidEmail } from '../../utils/validators';
 interface AddEmployeeModalProps {
   onClose: () => void;
   onSuccess: () => void;

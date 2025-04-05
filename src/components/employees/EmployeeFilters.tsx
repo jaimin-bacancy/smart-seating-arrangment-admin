@@ -1,6 +1,4 @@
 import React from 'react';
-import useCollection from '../../hooks/useCollection';
-import { Project } from '../../types';
 import { projects } from '../../utils/projects';
 
 interface EmployeeFiltersProps {

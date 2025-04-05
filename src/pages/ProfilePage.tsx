@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { User } from 'lucide-react';
+import { useUI } from '../contexts/UIContext';
 import useAuth from '../hooks/useAuth';
 import useCollection from '../hooks/useCollection';
-import { Project, Seat } from '../types';
 import { UserService } from '../services/users';
-import { useUI } from '../contexts/UIContext';
+import { Project, Seat } from '../types';
 
 const ProfilePage: React.FC = () => {
   const { userProfile, changePassword, changeEmail } = useAuth();

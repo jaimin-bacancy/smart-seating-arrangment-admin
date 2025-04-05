@@ -1,8 +1,7 @@
 import React from 'react';
+import { firestore } from '../../config/firebaseConfig';
 import { Project } from '../../types';
 import { WithId } from '../../types/firebase';
-import { doc, getDoc } from 'firebase/firestore';
-import { firestore } from '../../config/firebaseConfig';
 interface ProjectDistributionProps {
   projects: WithId<Project>[];
 }

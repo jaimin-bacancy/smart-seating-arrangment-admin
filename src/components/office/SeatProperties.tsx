@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Seat, SeatType, SeatStatus } from '../../types';
+import { arrayUnion, Timestamp } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import { firestore } from '../../config/firebaseConfig';
 import useCollection from '../../hooks/useCollection';
-import { User } from '../../types';
-import { WithId } from '../../types/firebase';
-import { arrayUnion, Timestamp } from 'firebase/firestore';
+import { Seat, SeatStatus, SeatType, User } from '../../types';
 
 interface SeatPropertiesProps {
   floorId: string | null;

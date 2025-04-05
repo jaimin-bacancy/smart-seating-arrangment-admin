@@ -1,8 +1,8 @@
+import { doc } from 'firebase/firestore';
 import React from 'react';
-import useCollection from '../../hooks/useCollection';
-import { Floor, Zone, Seat } from '../../types';
 import { firestore } from '../../config/firebaseConfig';
-import { arrayRemove, arrayUnion, doc, Timestamp } from 'firebase/firestore';
+import useCollection from '../../hooks/useCollection';
+import { Floor, Seat, Zone } from '../../types';
 
 interface OfficeLayoutMapProps {
   floorId?: string;

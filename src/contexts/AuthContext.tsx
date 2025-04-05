@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { auth } from '../config/firebaseConfig';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { setupAuthObserver } from '../services/auth';
 import { UserService } from '../services/users';
 import { User } from '../types';
