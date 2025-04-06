@@ -3,7 +3,6 @@
 /dist
 .parcel-cache
 .vite
-/functions
 /build
 /postcss.config.js
 *.DS_Store
