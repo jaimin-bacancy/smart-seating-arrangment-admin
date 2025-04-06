@@ -28,7 +28,7 @@ exports.workspaceAssistant = functions.https.onRequest(async (req, res) => {
   // Set CORS headers
   res.set("Access-Control-Allow-Origin", "*");
   res.set("Access-Control-Allow-Methods", "GET, POST");
-  res.set("Access-Control-Allow-Headers", "Content-Type");
+  res.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
   // Handle preflight requests
   if (req.method === "OPTIONS") {
@@ -75,7 +75,7 @@ exports.workspaceAssistant = functions.https.onRequest(async (req, res) => {
       return;
     }
 
-    const openai = new OpenAI({ apiKey: openaiKey });
+    const openai = new OpenAI({ apiKey: openaiKey.value() });
 
     // Gather current workspace data based on user role and prompt
     const workspaceData = await gatherWorkspaceData(prompt, user);

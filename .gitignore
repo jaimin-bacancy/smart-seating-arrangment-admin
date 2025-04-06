@@ -7,3 +7,4 @@
 /postcss.config.js
 *.DS_Store
 *.env
+public
