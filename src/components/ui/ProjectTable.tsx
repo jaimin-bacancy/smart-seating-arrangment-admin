@@ -51,7 +51,7 @@ const ProjectTable: React.FC<EmployeeTableProps> = ({
                   {project.techStack.map((skill, i) => (
                     <span
                       key={i}
-                      className="px-2 py-1 bg-[#E7873C] rounded text-xs"
+                      className="px-2 py-1 bg-[#E7873C] text-white rounded text-xs"
                     >
                       {skill}
                     </span>
@@ -66,7 +66,7 @@ const ProjectTable: React.FC<EmployeeTableProps> = ({
                     return (
                       <span
                         key={member.id}
-                        className="px-2 py-1 mr-2 bg-[#E7873C] text-xs font-bold rounded-full"
+                        className="px-2 py-1 mr-2 bg-[#E7873C] text-white text-xs font-bold rounded-full"
                       >
                         {name?.charAt(0)}
                       </span>

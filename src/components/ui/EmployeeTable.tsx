@@ -1,9 +1,6 @@
 import React from "react";
 import { User } from "../../types";
 import { WithId } from "../../types/firebase";
-import { UserService } from "../../services/users";
-import { doc, getDoc } from "firebase/firestore";
-import { firestore } from "../../config/firebaseConfig";
 interface EmployeeTableProps {
   employees: WithId<User>[];
   onEdit: (employee: WithId<User>) => void;
@@ -14,7 +11,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
   employees,
   onEdit,
   onRemove,
-}) => {  
+}) => {
   return (
     <div className="overflow-hidden shadow rounded-lg">
       <table className="min-w-full divide-y divide-gray-200">
@@ -58,7 +55,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="px-2 inline-flex leading-5 rounded bg-[#E7873C] text-xs">
+                  <span className="px-2 inline-flex leading-5 rounded bg-[#E7873C] text-white text-xs">
                     {employee.department}
                   </span>
                 </td>
@@ -67,7 +64,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
                     {employee.techSkills.map((skill, i) => (
                       <span
                         key={i}
-                        className="px-2 py-1 bg-[#E7873C] rounded text-xs"
+                        className="px-2 py-1 bg-[#E7873C] text-white rounded text-xs"
                       >
                         {skill}
                       </span>
@@ -92,7 +89,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
                   </button>
                 </td>
               </tr>
-            )
+            );
           })}
         </tbody>
       </table>
