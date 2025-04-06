@@ -5,7 +5,7 @@ import SearchInput from '../ui/SearchInput';
 import EmployeeFilters from './EmployeeFilters';
 import { User } from '../../types';
 import { WithId } from '../../types/firebase';
-
+import { doc, getDoc } from 'firebase/firestore';
 interface EmployeeListProps {
   employees: WithId<User>[];
   loading: boolean;

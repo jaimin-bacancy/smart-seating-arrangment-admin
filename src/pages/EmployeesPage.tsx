@@ -9,6 +9,7 @@ import useCollection from "../hooks/useCollection";
 import { UserService } from "../services/users";
 import { User } from "../types";
 import { WithId } from "../types/firebase";
+import { getDoc } from "firebase/firestore";
 
 const EmployeesPage: React.FC = () => {
   // State for search and pagination
@@ -70,6 +71,23 @@ const EmployeesPage: React.FC = () => {
         filtered = filtered.filter((employee) =>
           employee.techSkills?.includes(techSkillFilter)
         );
+      }
+
+      if(employees.length > 0) {
+        employees.map(async (employee) => {
+          if (employee.assignedSeat) {
+            console.log('employee.assignedSeat:::')
+            try {
+              const seatDoc = await getDoc(employee.assignedSeat);
+              if (seatDoc.exists()) {
+                if(!employee.seatData)
+                  employee.seatData = seatDoc.data();
+              }
+            } catch (err) {
+              console.error(`Error fetching seat for ${employee.displayName}`, err);
+            }
+          }
+        })
       }
 
       setFilteredEmployees(filtered);
