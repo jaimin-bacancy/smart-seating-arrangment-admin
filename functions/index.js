@@ -24,35 +24,64 @@ const openaiKey = defineString("OPENAI_KEY");
  * Allows admins, PMs, and DOEs to ask natural language questions about
  * workspace organization and get AI-powered recommendations.
  */
-exports.workspaceAssistant = onCall(async (data, context) => {
-  // Verify authentication
-  const uid = context.auth?.uid;
-  if (!uid) throw new Error("User must be authenticated.");
+exports.workspaceAssistant = functions.https.onRequest(async (req, res) => {
+  // Set CORS headers
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "GET, POST");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
 
-  // Get user data and verify permissions
-  const userSnap = await db.doc(`users/${uid}`).get();
-  if (!userSnap.exists) throw new Error("User not found");
-  const user = userSnap.data();
-
-  // Check if user has appropriate role
-  const allowedRoles = ["admin", "pm", "doe"];
-  if (!allowedRoles.includes(user.role)) {
-    throw new Error(
-      "Insufficient permissions. Admin, PM, or DOE role required."
-    );
+  // Handle preflight requests
+  if (req.method === "OPTIONS") {
+    res.status(204).send("");
+    return;
   }
 
-  // Get user prompt
-  const { prompt } = data;
-  if (!prompt) throw new Error("Prompt is required");
+  // Verify that this is a POST request
+  if (req.method !== "POST") {
+    res.status(405).json({ error: "Method not allowed. Please use POST." });
+    return;
+  }
 
-  const openai = new OpenAI({ apiKey: openaiKey.value() });
+  try {
+    // Extract data from request body
+    const { prompt, uid } = req.body;
 
-  // Gather current workspace data based on user role and prompt
-  const workspaceData = await gatherWorkspaceData(prompt, user);
+    // Validate required fields
+    if (!uid) {
+      res.status(400).json({ error: "User ID (uid) is required" });
+      return;
+    }
 
-  // Build system prompt
-  const systemPrompt = `
+    if (!prompt) {
+      res.status(400).json({ error: "Prompt is required" });
+      return;
+    }
+
+    // Get user data and verify permissions
+    const userSnap = await db.doc(`users/${uid}`).get();
+    if (!userSnap.exists) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+
+    const user = userSnap.data();
+
+    // Check if user has appropriate role
+    const allowedRoles = ["admin", "pm", "doe"];
+    if (!allowedRoles.includes(user.role)) {
+      res.status(403).json({
+        error: "Insufficient permissions. Admin, PM, or DOE role required.",
+      });
+      return;
+    }
+
+    const openai = new OpenAI({ apiKey: openaiKey });
+
+    // Gather current workspace data based on user role and prompt
+    const workspaceData = await gatherWorkspaceData(prompt, user);
+
+    // Build system prompt
+    const systemPrompt = `
 You are an intelligent workspace assistant for a smart office environment.
 You help optimize seating arrangements, floor planning, and event organization.
 
@@ -63,10 +92,10 @@ Your capabilities:
 - Answer questions about the current office setup
 
 Use the provided workspace data to give specific, detailed recommendations.
-  `.trim();
+    `.trim();
 
-  // Build user prompt with context
-  const userPrompt = `
+    // Build user prompt with context
+    const userPrompt = `
 User: ${user.displayName} (${user.role} in ${user.department})
 User Query: "${prompt}"
 
@@ -75,29 +104,37 @@ ${JSON.stringify(workspaceData, null, 2)}
 
 Based on the available data, provide a helpful response that directly addresses the query.
 Include specific recommendations if the query is asking for them.
-  `.trim();
+    `.trim();
 
-  // OpenAI API call
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4",
-    messages: [
-      { role: "system", content: systemPrompt },
-      { role: "user", content: userPrompt },
-    ],
-  });
+    // OpenAI API call
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt },
+      ],
+    });
 
-  const response = completion.choices[0].message.content;
+    const response = completion.choices[0].message.content;
 
-  // Log the interaction
-  await db.collection("ai_queries").add({
-    userId: uid,
-    userRole: user.role,
-    prompt,
-    response,
-    timestamp: admin.firestore.FieldValue.serverTimestamp(),
-  });
+    // Log the interaction
+    await db.collection("ai_queries").add({
+      userId: uid,
+      userRole: user.role,
+      prompt,
+      response,
+      timestamp: admin.firestore.FieldValue.serverTimestamp(),
+    });
 
-  return { response };
+    // Send the response
+    res.status(200).json({ response });
+  } catch (error) {
+    console.error("Error in workspaceAssistant:", error);
+    res.status(500).json({
+      error: "An error occurred processing your request",
+      message: error.message,
+    });
+  }
 });
 
 /**
